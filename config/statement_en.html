@@ -1,132 +1,180 @@
 <div id="statement_back" class="statement_back" style="display:none"></div>
 <div class="statement-body">
-  <!-- GOAL -->
-  <div class="statement-section statement-goal">
-    <h1>
-      <span class="icon icon-goal">&nbsp;</span>
-      <span>The Goal</span>
-    </h1>
-    <div class="statement-goal-content">
-      The aim of this game is to win.
-      <br>
-      <br>
-      For this question, you will be asked to output a single line as a solution.
+    <!-- GOAL -->
+    <div class="statement-section statement-goal">
+        <h1>
+            <span class="icon icon-goal">&nbsp;</span>
+            <span>The Goal</span>
+        </h1>
+        <div class="statement-goal-content">
+            You will be given an integer and have to decide whether it is a prime number or not. <br>
+            But beware, you have to write your program in a slightly modified version of <a href="https://www.codingame.com/training/medium/cgfunge-interpreter">CG Funge</a> (description below).
+            <br>
+            <br>
+            This is an optimization problem, your program should use as few execution steps as possible to find the correct answer.            
+        </div>
     </div>
-  </div>
-  <!-- RULES -->
-  <div class="statement-section statement-rules">
-    <h1>
-      <span class="icon icon-rules">&nbsp;</span>
-      <span>Rules</span>
-    </h1>
-    <div>
-      <div class="statement-rules-content">Your program receives characters.<br>
-        Your actions have an effect.<br>
-        <br>
-        The game zone works as follows:
-        <ul>
-          <li>There are coordinates.</li>
-        </ul>
-        <br>
-        The units work as follows:
-        <ul>
-          <li>They move around.</li>
-        </ul>
-        You <strong>lose</strong> if:
-        <ul>
-          <li>You mess up.</li>
-          <li>You do not supply a valid sequence of actions.</li>
-        </ul>
-      </div>
+    <!-- RULES -->
+    <div class="statement-section statement-rules">
+        <h1>
+            <span class="icon icon-rules">&nbsp;</span>
+            <span>Rules</span>
+        </h1>
+        <div>
+            <div class="statement-rules-content">
+                CGFunge is a 2-dimensional, positional programming language. This means that execution of a CGFunge program follows a designated pattern on a grid of ASCII characters. Execution always starts on the first character of the first line and proceeds to the right. Each command in the language is a single character. The commands
+                are as follow:
+                <br>
+                <table style="width:100%;border-spacing:10px;border-collapse:separate">
+                    <tr>
+                        <th>Command</th>
+                        <th>Effect</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>&gt;</const>
+                        </td>
+                        <td>Continue to the right</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>&lt;</const>
+                        </td>
+                        <td>Continue to the left</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>^</const>
+                        </td>
+                        <td>Continue up</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>v</const>
+                        </td>
+                        <td>Continue down</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>S</const>
+                        </td>
+                        <td>Skip the next character and continue with the subsequent character</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>E</const>
+                        </td>
+                        <td>End the program immediately</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>0</const>-<const>9</const>
+                        </td>
+                        <td>Push a number onto the stack</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>+</const>
+                        </td>
+                        <td>Add the first two numbers of the stack (e.g. <const>43+</const> results in a <const>7</const> on the stack)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>-</const>
+                        </td>
+                        <td>Subtract the first two numbers of the stack (e.g. <const>43-</const> results in a <const>1</const> on the stack)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>*</const>
+                        </td>
+                        <td>Multiply the first two numbers of the stack (e.g. <const>43*</const> results in a <const>12</const> on the stack)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>/</const>
+                        </td>
+                        <td>Divide the first two numbers of the stack (e.g. <const>43/</const> results in a <const>1</const> on the stack) - division will truncate to form an integer</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>P</const>
+                        </td>
+                        <td>Pop the top of the stack</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>X</const>
+                        </td>
+                        <td>Removes the top value of the stack and takes it as an index. Then removes the value at the index from the stack and push it on top (e.g.: <const>1X</const> switches the order of the top two stack values)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>D</const>
+                        </td>
+                        <td>Push a duplicate of the top value onto the stack</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>:</const>
+                        </td>
+                        <td>Pop the top value of the stack. If it is negative, turn left. If it is positive, turn right. If it is <const>0</const>, keep the current direction</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>I</const>
+                        </td>
+                        <td>Pop the top integer from the stack and print it</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>C</const>
+                        </td>
+                        <td>Pop the top integer from the stack and print it as a character (using the ASCII code)</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <const>&quot;</const>
+                        </td>
+                        <td>Toggle string mode. In string mode, every character will push the corresponding ASCII value on the stack</td>
+                    </tr>
+                </table>
+                <br>
+                Any other character will simply be ignored.
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- EXPERT RULES -->
-  <div class="statement-section statement-expertrules">
-    <h1>
-      <span class="icon icon-expertrules">&nbsp;</span>
-      <span>Expert Rules</span>
-    </h1>
-    <div class="statement-expert-rules-content">
-      If you're going to run local simulations, you'll need to know this!
-    </div>
-  </div>
-  <!-- EXAMPLES -->
-  <div class="statement-section statement-examples">
-    <h1>
-      <span class="icon icon-example">&nbsp;</span>
-      <span>Example</span>
-    </h1>
+    <!-- PROTOCOL -->
+    <div class="statement-section statement-protocol">
+        <h1>
+            <span class="icon icon-protocol">&nbsp;</span>
+            <span>Game Input</span>
+        </h1>
+        <!-- Protocol block -->
+        <div class="blk">
+            <div class="text">Initially the program will hold one single value <var>N</var> on the stack: the number which shall be tested for being prime.</div>
+        </div>
 
-    <div class="statement-examples-text">
-      A basic situation, an instruction, a result.
-    </div>
+        <!-- Protocol block -->
+        <div class="blk">
+            <div class="title">Output</div>
+            <div class="text">
+                <span class="statement-lineno">A single line</span> saying <command>PRIME</command> or <command>NOT PRIME</command>
+                <br>
+                To submit your solution, write a program in any language that prints CGFunge code to stdout. The first line of output should be the <var>lineCount</var>. The next <var>lineCount</var> lines should be the actual program. <br>
+                It is recommended to code in PHP, then you can write CGFunge code directly (you have to delete <const>&lt;?php</const> as well).
+            </div>
+        </div>
 
-  </div>
-  <!-- WARNING -->
-  <div class="statement-section statement-warning">
-    <h1>
-      <span class="icon icon-warning">&nbsp;</span>
-      <span>Note</span>
-    </h1>
-    <div class="statement-warning-content">
-      <b>Don’t forget to run the tests by launching them from the “Test cases” window</b>. You can submit at any time
-      to recieve a score against the training validators. <b>You can submit as many times as you like</b>. Your most
-      recent submission will be used for the final ranking.<br>
-      <br>
-      <strong>Warning:</strong> the validation tests used to compute the final score are not the same as the ones used
-      during the event.
-      Harcoded solutions will not score highly.<br>
-      <br>
-      Don't hesitate to change the viewer's options to help debug your code (<img style="opacity:.8;background:#20252a;"
-        height="18" src="https://www.codingame.com/servlet/fileservlet?id=3463235186409" width="18">).
+        <!-- Protocol block -->
+        <div class="blk">
+            <div class="title">Constraints</div>
+            <div class="text">
+                <const>1</const> &le; <var>N</var> &le; <const>10000</const><br>
+                <var>lineCount</var> &le; <const>30</const> <br>
+                <var>lineLength</var> &le; <const>40</const> <br>
+                <var>maximum number of turns</var> &le; <const>3000</const>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- PROTOCOL -->
-  <div class="statement-section statement-protocol">
-    <h1>
-      <span class="icon icon-protocol">&nbsp;</span>
-      <span>Game Input</span>
-    </h1>
-    <!-- Protocol block -->
-    <div class="blk">
-      <div class="text">The program must first read the initialization data from standard input. Then, provide to the
-        standard output one line with ...</div>
-    </div>
-
-    <!-- Protocol block -->
-    <div class="blk">
-      <div class="title">Input</div>
-      <div class="text">
-        <p><span class="statement-lineno">Line 1: </span>one string <var>...</var>, the ...</p>
-      </div>
-    </div>
-
-    <!-- Protocol block -->
-    <div class="blk">
-      <div class="title">Output</div>
-      <div class="text">
-        <span class="statement-lineno">A single line</span> containing ...
-        <br>
-      </div>
-    </div>
-
-    <!-- Protocol block -->
-    <div class="blk">
-      <div class="title">Constraints</div>
-      <div class="text"><var>...</var> contains between 1 and 500 characters.<br>
-        <br>Allotted response time to output
-        is ≤ <const>2</const> seconds.</div>
-    </div>
-  </div>
-  <!-- STORY -->
-  <div class="statement-story-background">
-    <div class="statement-story-cover" style="background-size: cover; background-image: url(https://www.codingame.com/servlet/fileservlet?id=2210505809934)">
-      <div class="statement-story" style="min-height: 300px; position: relative">
-        <h1>Title</h1>
-        <div class="story-text">Story
-          <br>
-          Totally optional</div>
-      </div>
-    </div>
-  </div>
 </div>
