@@ -38,6 +38,7 @@ public class Referee extends AbstractReferee {
     public void init() {
         String input = gameManager.getTestCaseInput().get(0);
         interpreter = new Interpreter(input);
+        interpreter.initView(graphicEntityModule);
         gameManager.setMaxTurns(3000);
 
         int value = Integer.parseInt(input);
@@ -69,7 +70,6 @@ public class Referee extends AbstractReferee {
                 gameManager.loseGame("Player timed out");
             }
 
-            interpreter.initView(graphicEntityModule);
             interpreter.setCode(code);
         } else {
             interpreter.buildView(graphicEntityModule);

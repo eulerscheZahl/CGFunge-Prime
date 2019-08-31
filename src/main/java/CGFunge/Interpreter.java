@@ -88,12 +88,14 @@ public class Interpreter {
         for (int x = 0; x < width; x++) {
             Sprite sprite = graphicEntityModule.createSprite().setImage("tile.png");
             placeInCodeGroup(sprite, x * GRID_SIZE, y * GRID_SIZE);
-            Text text = graphicEntityModule.createText(String.valueOf(grid[x][y])).setFontFamily("Nimbus Mono L").setFontWeight(Text.FontWeight.BOLD);
-            placeInCodeGroup(text, x * GRID_SIZE + 15, y * GRID_SIZE + 7);
-            text.setFillColor(0xFF0000);
-            text.setFontSize(30);
+            if (grid[x][y] != ' ') {
+                Text text = graphicEntityModule.createText(String.valueOf(grid[x][y])).setFontFamily("Nimbus Mono L").setFontWeight(Text.FontWeight.BOLD);
+                placeInCodeGroup(text, x * GRID_SIZE + 15, y * GRID_SIZE + 7);
+                text.setFillColor(0xFF0000);
+                text.setFontSize(30);
+            }
         }
-        graphics.commitWorldState(0);
+       graphics.commitWorldState(0);
     }
 
     public boolean isFinished() {
